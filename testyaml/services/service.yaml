@@ -5,6 +5,8 @@ metadata:
     app: nginx
   name: nginx
   namespace: nginx
+  annotations:
+    loadbalancernetwork: public
 spec:
   clusterIP: 10.43.89.246
   clusterIPs:
@@ -20,6 +22,6 @@ spec:
   selector:
     app: nginx
   sessionAffinity: None
-  type: ClusterIP
+  type: LoadBalancer
 status:
   loadBalancer: {}
