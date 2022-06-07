@@ -9,6 +9,4 @@ spec:
         kinds: ["Service"]
   parameters:
     labels: 
-      - "zone"
-      - "appid"
-      - "status"
+      - "loadbalancernetwork"

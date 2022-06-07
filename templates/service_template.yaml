@@ -24,10 +24,10 @@ spec:
          package servicelabels
 
          violation[{"msg": msg, "details": {}}] {
-           provided := {label | input.review.object.metadata.labels[label]}
+           provided := {label | input.review.object.metadata.annotations[label]}
            required := {label | label := input.parameters.labels[_]}
            missing := required - provided
            count(missing) > 0
-           msg := sprintf("\n\nDENIED. \nReason: Our org policy mandates the following labels: %v\nYou must provide these labels: %v", [required, missing])
+           msg := sprintf("\n\nDENIED. \nReason: Our org policy mandates the following labels: %v\nYou must provide these annotations: %v", [required, missing])
          }
 ---

@@ -6,7 +6,7 @@ metadata:
   name: nginx
   namespace: nginx
   annotations:
-    loadbalancernetwork: public
+    loadbalancernetwor: public
 spec:
   clusterIP: 10.43.89.246
   clusterIPs:
