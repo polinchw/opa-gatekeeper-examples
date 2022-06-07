@@ -30,4 +30,10 @@ spec:
            count(missing) > 0
            msg := sprintf("\n\nDENIED. \nReason: Our org policy mandates the following annotations: %v\nYou must provide these annotations: %v", [required, missing])
          }
+
+         violation[{"msg": msg, "details": {}}] {
+           network := input.review.object.metadata.annotations.loadbalancernetwork
+           not network == "private"
+           msg := sprintf("\n\nDENIED. \nReason: Our org policy mandates a private network for load balancers")
+         }
 ---
