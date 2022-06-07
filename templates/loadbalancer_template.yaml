@@ -1,0 +1,38 @@
+---
+apiVersion: templates.gatekeeper.sh/v1beta1
+kind: ConstraintTemplate
+metadata:
+  name: loadbalancerlabels
+spec:
+  crd:
+    spec:
+      names:
+        kind: LoadBalancerLabels
+        listKind: LoadBalancerLabelsList
+        plural: loadbalancerlabels
+        singular: loadbalancerlabels
+      validation:
+        openAPIV3Schema:
+          properties:
+            labels:
+              type: array
+              items: string
+  targets:
+    - target: admission.k8s.gatekeeper.sh
+      rego: |
+         package loadbalancerlabels
+
+         violation{
+             contains_team_label
+         }
+
+         contains_team_label{
+            value := input.request.object.metadata.labels.team
+
+            # Check if the label value is formatted correctly.
+            not startswith(value, "cccode-")
+
+            # Construct an error message to return to the user.
+            msg := sprintf("Costcenter code must start with `cccode-`; found `%v`", [value])
+         }
+---
