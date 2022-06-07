@@ -8,5 +8,5 @@ spec:
       - apiGroups: [""]
         kinds: ["Service"]
   parameters:
-    labels: 
+    annotations: 
       - "loadbalancernetwork"
