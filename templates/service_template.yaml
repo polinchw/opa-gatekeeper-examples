@@ -35,4 +35,9 @@ spec:
            msg := "The loadbalancernetwork must be private."
          }
 
+         violation[{"msg": msg}] {
+           not input.review.object.spec.loadBalancerIP
+           msg := "The loadBalancerIP must be provided."
+         }
+
 ---
