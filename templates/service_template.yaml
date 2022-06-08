@@ -23,17 +23,10 @@ spec:
       rego: |
          package servicelabels
 
-         violation[{"msg": msg, "details": {}}] {
-           provided := {label | input.review.object.metadata.annotations[label]}
-           required := {label | label := input.parameters.annotations[_]}
-           missing := required - provided
-           count(missing) > 0
-           msg := sprintf("\n\nDENIED. \nReason: Our org policy mandates the following annotations: %v\nYou must provide these annotations: %v", [required, missing])
+         violation[{"msg": msg}] {
+           sprintf(input.review.object.metadata.annotations,["hi"])
+           not input.review.object.metadata.annotations.loadbalancernetwork == "private"
+           msg := "Error you must use a private network in the annotation"
          }
 
-         violation[{"msg": msg, "details": {}}] {
-           network := input.review.object.metadata.annotations.loadbalancernetwork
-           not network == "private"
-           msg := sprintf("\n\nDENIED. \nReason: Our org policy mandates a private network for load balancers")
-         }
 ---
