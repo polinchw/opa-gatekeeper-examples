@@ -26,6 +26,7 @@ spec:
          violation[{"msg": msg}] {
            input.review.object.kind == "Service"
            input.review.object.spec.type == "LoadBalancer"
+           input.review.object.metadata.annotations.loadbalancernetwork
            not input.review.object.metadata.annotations.loadbalancernetwork == "private"
            msg := "Error you must use a private network in the annotation"
          }
