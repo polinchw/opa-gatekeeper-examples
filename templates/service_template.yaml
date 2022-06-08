@@ -24,8 +24,8 @@ spec:
          package servicelabels
 
          violation[{"msg": msg}] {
-           sprintf(input.review.object.metadata.annotations,["hi"])
-           not input.review.object.metadata.annotations.loadbalancernetwork == "private"
+           input.review.object.kind == "Service"
+           input.review.object.spec.type == "LoadBalancer"
            msg := "Error you must use a private network in the annotation"
          }
 
