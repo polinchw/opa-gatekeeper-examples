@@ -8,6 +8,7 @@ metadata:
   annotations:
     loadbalancernetwork: public
 spec:
+  loadBalancerIP: 10.10.10.10
   clusterIP: 10.43.89.246
   clusterIPs:
   - 10.43.89.246
