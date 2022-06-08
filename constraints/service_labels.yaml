@@ -7,6 +7,10 @@ spec:
     kinds:
       - apiGroups: [""]
         kinds: ["Service"]
+    namespaceSelector:
+      matchExpressions:
+      - key: team 
+        operator: Exists
   parameters:
     annotations: 
       - "loadbalancernetwork"
